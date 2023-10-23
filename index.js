@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const routes = require("./routes");
-const { createTable } = require("./config/db.config");
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
