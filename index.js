@@ -1,8 +1,13 @@
+require("dotenv").config();
 const express = require("express");
+const routes = require("./routes");
+const { createTable } = require("./config/db.config");
 
 const app = express();
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+
+app.use('/api/v1', routes);
 
 // handle 404
 app.use((req, res, next) => {
