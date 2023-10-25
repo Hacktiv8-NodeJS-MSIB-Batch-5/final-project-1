@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+// using PostgreSQL v 16.0
+// seluruh nama tabel dan kolom yang ter-create itu berupa lowercase (huruf kecil semua)
 const Pool = require("pg").Pool
 
 const db = new Pool({
@@ -14,7 +16,7 @@ const db = new Pool({
 const createUserTable = async () => {
   const queryText = `CREATE TABLE
     Users(
-      id UUID PRIMARY KEY,
+      id SERIAL PRIMARY KEY,
       email VARCHAR(128) UNIQUE NOT NULL,
       password VARCHAR(128) NOT NULL
     )`;
@@ -32,14 +34,14 @@ const createUserTable = async () => {
 const createReflectionTable = async () => {
   const queryText = `CREATE TABLE
     Reflections(
-      id UUID PRIMARY KEY,
+      id SERIAL PRIMARY KEY,
       success TEXT NOT NULL,
       low_point TEXT NOT NULL,
       take_away TEXT NOT NULL,
-      created_at TIMESTAMP,
-      updated_at TIMESTAMP,
-      UserId UUID NOT NULL REFERENCES Users(id) ON DELETE CASCADE
-    )`;
+      UserId INTEGER NOT NULL,
+      createdAt TIMESTAMP,
+      updatedAt TIMESTAMP,
+      FOREIGN KEY (userid) REFERENCES users(id) ON DELETE CASCADE    )`;
 
   await db.query(queryText)
     .then((res) => {
@@ -53,7 +55,7 @@ const createReflectionTable = async () => {
 };
 
 // Create Table
-const createTable = async () => {
+const createAllTables = async () => {
   try{
     await createUserTable();
     await createReflectionTable();
@@ -67,5 +69,5 @@ module.exports = {
   db,
   createUserTable,
   createReflectionTable,
-  createTable
+  createAllTables
 }

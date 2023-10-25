@@ -1,5 +1,6 @@
 -- using Postgres v 16.0
 -- setelah menjalankan file sql ini, seluruh nama tabel dan kolom akan tergenerate dengan lowercase (huruf kecil semua)
+-- unused
 
 DROP TABLE IF EXISTS "reflections";
 DROP TABLE IF EXISTS "users";
