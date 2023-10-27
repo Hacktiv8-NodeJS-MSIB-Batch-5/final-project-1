@@ -7,3 +7,5 @@ router.use('/users', userRoutes);
 router.post('/reflections', auth, reflectionController.createReflection);
 
 module.exports = router;
+
+console.log("Hallo");
