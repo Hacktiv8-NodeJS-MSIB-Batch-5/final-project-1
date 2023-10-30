@@ -2,11 +2,12 @@ const { verifyToken } = require('../helpers/jwt');
 const { db } = require("../config/db.config");
 
 const authentication = async (req, res, next) => {
-  const header = req.headers["authorization"];
-  
+  // const header = req.headers["authorization"];
+  const bearerHeader = req.headers["authorization"]
+  const token = bearerHeader && bearerHeader.split(' ')[1]
+  const decode = verifyToken(token);
   try{
-    const token = header.split(" ")[1];
-    const decode = verifyToken(token);
+    // const token = header.split(" ")[1];
     // console.log(decode);
     await db.query(`select * from users where email = $1`, [decode.email])
       .then((user) => {
