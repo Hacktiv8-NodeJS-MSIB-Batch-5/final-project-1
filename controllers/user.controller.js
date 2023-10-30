@@ -23,12 +23,12 @@ exports.register = async (req, res) => {
         })
       })
       .catch((e) => {
-        res.status(500).json(e);
+        res.status(500).json({error: "An error occured while attempting to register", message: e.message});
       })
   })
   .catch((e) => {
     console.log(e);
-    res.status(500).json(e);
+    res.status(500).json({error: "An error occured while attempting to register", message: e.message});
   })
 }
 
@@ -49,6 +49,6 @@ exports.login = async (req, res) => {
     }
   })
   .catch((e) => {
-    res.status(500).json(e);
+    res.status(500).json({error: "An error occured while attempting to log in", message: e.message});
   })
 }

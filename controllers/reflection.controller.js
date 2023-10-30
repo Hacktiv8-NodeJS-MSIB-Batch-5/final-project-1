@@ -31,7 +31,7 @@ exports.createReflection = async (req, res) => {
     })
     .catch((e) => {
       console.log(e);
-      res.status(500).json(e);
+      res.status(500).json({error: "An error occured while attempting to create reflection", message: e.message});
     })
 }
 
